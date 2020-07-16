@@ -1,0 +1,112 @@
+.card {
+  visibility: hidden;
+  flex: 1;
+  max-width: 600px;
+  height: 600px;
+  margin: 75px 0 50px 75px;
+  background-color: white;
+  border-radius: 5px;
+  position: relative;
+  box-shadow:  15px 15px 27px #c7c7c7, -15px -15px 27px $light-grey;
+  header {
+    height: 80px;
+    background-color: $light-blue;
+    color: white;
+    border-bottom: 1px solid $grey;
+    padding: 25px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    font-size: 20pt;
+    overflow: hidden;
+    position: relative;
+  }
+  footer {
+     border-top: 1px solid $grey;
+     position: absolute;
+     bottom: 0;
+     width: 100%;
+  }
+  &.open {
+    visibility: visible;
+  }
+}
+
+.actions-menu {
+  display: flex;
+  visibility: hidden;
+  position: absolute;
+  height: 80px;
+  width: 200px;
+  padding: 24px;
+  top: 0;
+  right: 0;
+  background-color: inherit;
+  span {
+    width: 100px;
+    color: rgba($color: #fff, $alpha: 0.8);
+    &:hover {
+      color: white;
+      cursor: pointer;
+    }
+  }
+  &.open {
+    visibility: visible;
+  }
+}
+
+.list-task {
+  margin: 15px 25px;
+  padding: 15px 25px;
+  border-radius: 5px;
+  border: 1px solid $grey;
+  display: flex;
+  align-items: center;
+  transition: background-color 0.2s;
+  span {
+    margin-left: 25px;
+    width: 100%;
+  }
+  &:hover {
+    background-color: $light-grey;
+    color: $light-blue;
+    cursor: pointer;
+  }
+  &.complete {
+    color: $grey;
+    position: relative;
+    &:before {
+      position: absolute;
+      content: "";
+      left: 0;
+      top: 50%;
+      right: 0;
+      border-top: 1px solid;
+      border-color: inherit;
+      margin: 0 20px 0 70px;
+    }
+  }
+}
+
+.list {
+  height: 430px;
+  overflow: auto;
+}
+
+.input-group {
+  display: flex;
+  padding: 25px;
+}
+
+#newTaskInput {
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid $grey;
+  width: 100%;
+  margin-right: 20px;
+  padding-left: 20px;
+  &:focus {
+    border: 1px solid $light-blue;
+  }
+}

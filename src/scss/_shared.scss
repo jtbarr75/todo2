@@ -1,0 +1,121 @@
+$light-blue: rgb(0, 161, 228);
+$lighter-blue: rgb(30, 191, 248);
+$light-grey: rgb(240, 240, 240);
+$grey: rgb(185,185,185);
+$red: rgb(156, 56, 72);
+$dark-orange: #F3722C;
+$light-orange: #F8961E;
+$yellow: #F5B700;
+$green: #04e762;
+$blue: #1e3888;
+
+// Main Content
+
+#main {
+  display: flex;
+  background-color: $light-grey;
+}
+
+.wrapper {
+  flex: 1;
+}
+
+.main-header {
+  width: 275px;
+  background-color: $light-grey;
+  padding: 15px 50px 15px 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  width: auto;
+  min-height: 100vh;
+  display: flex;
+  justify-content: flex-start;
+}
+
+
+// Highlighting
+
+.selected {
+  color: $light-blue;
+  font-weight: 700;
+}
+
+.red {
+  background-color: $red !important;
+}
+.lt-orange {
+  background-color: $light-orange !important;
+}
+.drk-orange {
+  background-color: $dark-orange !important;
+}
+.yellow {
+  background-color: $yellow !important;
+}
+.green {
+  background-color: $green !important;
+}
+.blue {
+  background-color: $blue !important;
+}
+
+// Focus
+
+@mixin glow {
+  box-shadow: 0 0 5px $light-blue;
+  border: 1px solid $light-blue;
+}
+
+// Hover
+
+@mixin hover($color) {
+  background-color: lighten($color, 12%);
+  cursor: pointer;
+}
+
+// Buttons
+
+.add-button {
+  border-radius: 50%;
+  height: 35px;
+  width: 35px;
+  border-style: none;
+  background-color: $light-blue;
+  color: white;
+  transition: background-color 0.2s;
+  &:hover {
+    @include hover($light-blue);
+  }
+}
+
+.complete-button {
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border: 1px solid $grey;
+  background-color: white;
+  transition: background-color 0.2s;
+  &:hover {
+    background-color: $grey;
+    cursor: pointer;
+  }
+  &.complete {
+    background-color: $grey;
+  }
+}
+
+// Icons 
+
+.material-icons {
+  font-size: 28px;
+  color: rgba($color: #fff, $alpha: 0.7);
+  margin-left: 25px;
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
+}
