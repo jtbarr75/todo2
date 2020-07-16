@@ -47,7 +47,18 @@ class App extends React.Component {
   }
 
   handleCloseClick = (event) => {
-    
+    const { id } = event.target
+    const type = id.substr(5)
+    if (type === "List") {
+      this.setState({
+        selectedList: -1,
+        selectedTask: -1
+      })
+    } else if (type === "Task") {
+      this.setState({
+        selectedTask: -1
+      })
+    }
   }
 
   render() {
@@ -55,9 +66,21 @@ class App extends React.Component {
     const task = list && list.tasks[this.state.selectedTask];
     return (
       <div className="content">
-        <Sidebar lists={this.state.lists} selected={this.state.selectedList} handleNavClick={this.handleNavClick} />
-        {list && <List list={list} selected={this.state.selectedTask} handleNavClick={this.handleNavClick} />}
-        {task && <Task task={task} />}
+        <Sidebar 
+          lists={this.state.lists} 
+          selected={this.state.selectedList} 
+          handleNavClick={this.handleNavClick} 
+        />
+        {list && <List 
+          list={list}
+          selected={this.state.selectedTask} 
+          handleNavClick={this.handleNavClick} 
+          handleCloseClick={this.handleCloseClick}
+        />}
+        {task && <Task 
+          task={task} 
+          handleCloseClick={this.handleCloseClick}
+        />}
       </div>
     )
   }

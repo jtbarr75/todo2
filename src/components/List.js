@@ -22,7 +22,7 @@ class List extends React.Component {
             <h1 id="listTitle" className="card-title">{this.props.list.name}</h1>
             <div className="icons">
               <MaterialIcon icon = "more_horiz" className="material-icons" id="listActions" />
-              <MaterialIcon icon = "close" className="material-icons" id="closeList" />
+              <MaterialIcon icon = "close" className="material-icons" id="closeList" onClick={this.props.handleCloseClick}/>
             </div>
             <div id="listMenu" className="actions-menu">
               <span id="editList" className="action-button">Edit</span>

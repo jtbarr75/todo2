@@ -11,7 +11,7 @@ class Task extends React.Component {
           <h1 id="taskTitle" className="card-title">{name}</h1>
           <div className="icons">
             <MaterialIcon icon = "more_horiz" className="material-icons" id="taskActions" />
-            <MaterialIcon icon = "close" className="material-icons" id="clostTask" />
+            <MaterialIcon icon = "close" className="material-icons" id="clostTask" onClick={this.props.handleCloseClick}/>
           </div>
           <div id="taskMenu" className="actions-menu">
             <span id="editTask" className="action-button">Edit</span>
