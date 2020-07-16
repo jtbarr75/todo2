@@ -3,10 +3,12 @@ import MaterialIcon from 'material-icons-react';
 
 class Task extends React.Component {
   render() {
+    const { name } = this.props.task;
+
     return (
       <div id="taskCard" className="card open">
         <header>
-          <h1 id="taskTitle" className="card-title">{}</h1>
+          <h1 id="taskTitle" className="card-title">{name}</h1>
           <div className="icons">
             <MaterialIcon icon = "more_horiz" className="material-icons" id="taskActions" />
             <MaterialIcon icon = "close" className="material-icons" id="clostTask" />
