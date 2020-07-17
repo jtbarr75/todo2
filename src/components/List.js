@@ -1,5 +1,5 @@
 import React from 'react';
-import MaterialIcon from 'material-icons-react';
+import CardMenu from './CardMenu';
 import NewTaskInput from './NewTaskInput';
 
 class List extends React.Component {
@@ -21,14 +21,7 @@ class List extends React.Component {
       <div id="listCard" className="card open">
           <header>
             <h1 id="listTitle" className="card-title">{this.props.list.name}</h1>
-            <div className="icons">
-              <MaterialIcon icon = "more_horiz" className="material-icons" id="listActions" />
-              <MaterialIcon icon = "close" className="material-icons" id="closeList" onClick={this.props.handleCloseClick}/>
-            </div>
-            <div id="listMenu" className="actions-menu">
-              <span id="editList" className="action-button">Edit</span>
-              <span id="deleteList" className="action-button">Delete</span>
-            </div>
+            <CardMenu handleCloseClick={this.props.handleCloseClick} type="list"/>
           </header>
           <ul id="list" className="list">
             {tasks}
