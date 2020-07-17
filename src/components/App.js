@@ -59,6 +59,24 @@ class App extends React.Component {
     }
   }
 
+  handleNotes = (event) => {
+    const { value } = event.target
+    this.setState(prevState => {
+      const updatedLists = prevState.lists.map(list => list);
+      const prevTasks = prevState.lists[prevState.selectedList].tasks;
+      const updatedTasks = prevTasks.map(task => {
+        if (task.index === prevState.selectedTask) {
+          task.notes = value
+        }
+        return task;
+      });
+      updatedLists[prevState.selectedList].tasks = updatedTasks;
+      return {
+        lists: updatedLists
+      }
+    })
+  }
+
   // Adds a new Task or List with name from origin element
   addItem = (name, origin) => {
     this.setState(prevState => {
@@ -111,6 +129,7 @@ class App extends React.Component {
         {task && <Task 
           task={task} 
           handleCloseClick={this.handleCloseClick}
+          handleChange={this.handleNotes}
         />}
       </div>
     )

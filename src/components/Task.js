@@ -3,7 +3,7 @@ import MaterialIcon from 'material-icons-react';
 
 class Task extends React.Component {
   render() {
-    const { name } = this.props.task;
+    const { name, notes } = this.props.task;
 
     return (
       <div id="taskCard" className="card open">
@@ -21,7 +21,15 @@ class Task extends React.Component {
         <div className="task-info">
           <input type="button" id="due" className="task-input" value="Add a due date..."/>
           <div id="date"></div>
-          <textarea type="textarea" id="notes" className="task-input" placeholder="Add notes..." wrap="soft"></textarea>
+          <textarea 
+            type="textarea" 
+            id="notes" 
+            className="task-input" 
+            placeholder="Add notes..." 
+            wrap="soft"
+            value={notes}
+            onChange={this.props.handleChange}
+          ></textarea>
           <div className="task-buttons">
             <button id="saveNotes" className="task-button">Save</button>
           </div>

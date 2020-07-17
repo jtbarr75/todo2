@@ -34,9 +34,7 @@ class List extends React.Component {
             {tasks}
           </ul>
           <footer>
-            
               <NewTaskInput addTask={this.props.addTask}/>
-              
           </footer>
         </div>
     )
