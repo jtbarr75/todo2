@@ -14,13 +14,21 @@ function NewTaskInput(props) {
     }
   }
 
+  const handleClick = (event) => {
+    setValue("");
+    props.addTask(value, event.target);
+  }
+
   return (
-    <input 
-      id="newTaskInput" 
-      value={value} 
-      onChange={handleOnChange}
-      onKeyUp={handleSubmit}
-    />
+    <div className="input-group">
+      <input 
+        id="newTaskInput" 
+        value={value} 
+        onChange={handleOnChange}
+        onKeyUp={handleSubmit}
+      />
+      <button id="newTaskButton" className="add-button" onClick={handleClick}>+</button>
+    </div>
   )
 }
 

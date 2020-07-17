@@ -1,39 +1,50 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
-function NewListInput(props) {
-  const [ value, setValue ] = useState("");
+class NewListInput extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: ""
+    }
+  }
 
-  const handleCloseClick = (event) => {
+  handleCloseClick = (event) => {
     if (event.target.id !== "newListInput") {
-      props.handleCloseClick();
+      this.props.handleCloseClick();
     }
   }
 
-  const handleOnChange = (event) => {
-    setValue(event.target.value)
+  handleOnChange = (event) => {
+    this.setState({value: event.target.value})
   }
 
-  const handleSubmit = (event) => {
+  handleSubmit = (event) => {
     if (event.keyCode ===  13) {
-      props.addList(value, event.target);
+      this.props.addList(this.state.value, event.target);
     }
   }
 
-  useEffect(() => {
-    document.addEventListener("click", handleCloseClick);
-    return () => {
-      document.removeEventListener("click", handleCloseClick);
-    }
-  })
+  componentDidMount() {
+    this.input.focus();
+    document.addEventListener("click", this.handleCloseClick);
+  }
 
-  return (
-    <input 
-      id="newListInput" 
-      value={value} 
-      onChange={handleOnChange}
-      onKeyUp={handleSubmit}
-    />
-  )
+  componentWillUnmount() {
+    document.removeEventListener("click", this.handleCloseClick);
+  }
+
+  render() {
+    return (
+      <input 
+        id="newListInput" 
+        ref={ input => this.input = input}
+        value={this.state.value} 
+        onChange={this.handleOnChange}
+        onKeyUp={this.handleSubmit}
+      />
+    )
+  }
+  
 }
 
 export default NewListInput

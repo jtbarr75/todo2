@@ -34,10 +34,9 @@ class List extends React.Component {
             {tasks}
           </ul>
           <footer>
-            <div className="input-group">
+            
               <NewTaskInput addTask={this.props.addTask}/>
-              <button id="newTaskButton" className="add-button">+</button>
-            </div>
+              
           </footer>
         </div>
     )

@@ -63,8 +63,15 @@ class App extends React.Component {
   addItem = (name, origin) => {
     this.setState(prevState => {
       const updatedLists = prevState.lists.map(list => list);
-      // Check if it should create a new task
-      if (origin.id === "newTaskInput") {
+      // Check if it should create a new List
+      if (origin.id === "newListInput") {
+        updatedLists.push({
+          index: prevState.lists.length,
+          name: name,
+          tasks: []
+        });
+      // Else is a new Task
+      } else {
         const prevTasks = prevState.lists[prevState.selectedList].tasks;
         const updatedTasks = prevTasks.map(task => task);
         updatedTasks.push({
@@ -74,13 +81,6 @@ class App extends React.Component {
           date: ""
         });
         updatedLists[prevState.selectedList].tasks = updatedTasks;
-      // Else is a new List
-      } else {
-        updatedLists.push({
-          index: prevState.lists.length,
-          name: name,
-          tasks: []
-        });
       }
 
       return {
