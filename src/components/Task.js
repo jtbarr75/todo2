@@ -9,7 +9,11 @@ class Task extends React.Component {
       <div id="taskCard" className="card open">
         <header>
           <h1 id="taskTitle" className="card-title">{name}</h1>
-          <CardMenu handleCloseClick={this.props.handleCloseClick} type="task"/>
+          <CardMenu 
+            handleCloseClick={this.props.handleCloseClick} 
+            type="task"
+            deleteItem={this.props.deleteItem}
+          />
         </header>
         <div className="task-info">
           <input type="button" id="due" className="task-input" value="Add a due date..."/>

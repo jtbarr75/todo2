@@ -4,9 +4,16 @@ function CardActions(props) {
   const { type } = props
 
   function handleClick(event) {
-    if (event.target.className !== "actions-menu") {
+    console.log(event)
+    const { id } = event.target;
+    if (id === `${type}Delete`) {
+      props.deleteItem(id)
+    } else if (id === `${type}Edit`) {
+
+    } else {
       props.close();
     }
+
   }
 
   useEffect(() => {
@@ -20,7 +27,12 @@ function CardActions(props) {
   return (
     <div id={`${type}Menu`} className="actions-menu">
       <span id={`${type}Edit`} className="action-button">Edit</span>
-      <span id={`${type}Delete`} className="action-button">Delete</span>
+      <span 
+        id={`${type}Delete`} 
+        className="action-button"
+      >
+        Delete
+      </span>
     </div>
   )
 }

@@ -8,7 +8,11 @@ function CardMenu(props) {
 
   if (open) {
     return (
-      <CardActions type={type} close={() => {setOpen(false)}}/>
+      <CardActions 
+        type={type} 
+        close={() => {setOpen(false)}}
+        deleteItem={props.deleteItem}
+      />
     )
   } else {
     return (

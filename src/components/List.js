@@ -5,11 +5,11 @@ import NewTaskInput from './NewTaskInput';
 class List extends React.Component {
   render() {
     const tasks = this.props.list.tasks.map(task => {
-      const className = (task.index === this.props.selected ? "list-task selected" : "list-task");
+      const className = (task.id === this.props.selected ? "list-task selected" : "list-task");
       return (
         <li 
-          key= {task.index} 
-          id={`task${task.index}`} 
+          key= {task.id} 
+          id={`task${task.id}`} 
           className={className}
           onClick={this.props.handleNavClick}
         >
@@ -21,7 +21,11 @@ class List extends React.Component {
       <div id="listCard" className="card open">
           <header>
             <h1 id="listTitle" className="card-title">{this.props.list.name}</h1>
-            <CardMenu handleCloseClick={this.props.handleCloseClick} type="list"/>
+            <CardMenu 
+              handleCloseClick={this.props.handleCloseClick} 
+              type="list"
+              deleteItem={this.props.deleteItem}
+            />
           </header>
           <ul id="list" className="list">
             {tasks}

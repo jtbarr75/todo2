@@ -9,19 +9,19 @@ class App extends React.Component {
     this.state = {
       lists: [
         {
-          index: 0,
+          id: 0,
           name: "Today",
           tasks: [
-            {index: 0, name: "Water Plants", notes: "", date: ""},
-            {index: 1, name: "Workout", notes: "", date: ""},
-            {index: 2, name: "Go Shopping", notes: "", date: ""}
+            {id: 0, name: "Water Plants", notes: "", date: ""},
+            {id: 1, name: "Workout", notes: "", date: ""},
+            {id: 2, name: "Go Shopping", notes: "", date: ""}
           ]
         },
         {
-          index: 1,
+          id: 1,
           name: "Tomorrow",
           tasks: [
-            {index: 0, name: "Water Plants Again", notes: "", date: ""}
+            {id: 0, name: "Water Plants Again", notes: "", date: ""}
           ]
         }
       ],
@@ -65,7 +65,7 @@ class App extends React.Component {
       const updatedLists = prevState.lists.map(list => list);
       const prevTasks = prevState.lists[prevState.selectedList].tasks;
       const updatedTasks = prevTasks.map(task => {
-        if (task.index === prevState.selectedTask) {
+        if (task.id === prevState.selectedTask) {
           task.notes = value
         }
         return task;
@@ -84,7 +84,7 @@ class App extends React.Component {
       // Check if it should create a new List
       if (origin.id === "newListInput") {
         updatedLists.push({
-          index: prevState.lists.length,
+          id: updatedLists[updatedLists.length - 1].id + 1,
           name: name,
           tasks: []
         });
@@ -92,25 +92,50 @@ class App extends React.Component {
       } else {
         const prevTasks = prevState.lists[prevState.selectedList].tasks;
         const updatedTasks = prevTasks.map(task => task);
+        const id = updatedTasks.length ? updatedTasks[updatedTasks.length - 1].id + 1 : 0;
         updatedTasks.push({
-          index: prevTasks.length,
+          id: id,
           name: name,
           notes: "",
           date: ""
         });
         updatedLists[prevState.selectedList].tasks = updatedTasks;
+        
       }
 
       return {
-        lists: updatedLists
+        lists: updatedLists,
       }
     })
+  }
+
+  deleteItem = (id) => {
+    this.setState(prevState => {
+      if (id === "listDelete") {
+        const updatedLists = prevState.lists.filter(list => list.id !== prevState.selectedList);
+        return {
+          lists: updatedLists,
+          selectedList: -1,
+          selectedTask: -1
+        }
+      } else {
+        const updatedLists = prevState.lists.map(list => list);
+        const prevTasks = prevState.lists[prevState.selectedList].tasks;
+        const updatedTasks = prevTasks.filter(list => list.id !== prevState.selectedTask);
+        updatedLists[prevState.selectedList].tasks = updatedTasks;
+        return {
+          lists: updatedLists,
+          selectedTask: -1
+        }
+      }
+      
+    });
   }
   
 
   render() {
-    const list = this.state.lists[this.state.selectedList];
-    const task = list && list.tasks[this.state.selectedTask];
+    const list = this.state.lists.find(list => list.id === this.state.selectedList);
+    const task = list && list.tasks.find(list => list.id === this.state.selectedTask);
     return (
       <div className="content">
         <Sidebar 
@@ -124,12 +149,14 @@ class App extends React.Component {
           selected={this.state.selectedTask} 
           handleNavClick={this.handleNavClick} 
           handleCloseClick={this.handleCloseClick}
+          deleteItem={this.deleteItem}
           addTask={this.addItem}
         />}
         {task && <Task 
           task={task} 
           handleCloseClick={this.handleCloseClick}
           handleChange={this.handleNotes}
+          deleteItem={this.deleteItem}
         />}
       </div>
     )

@@ -12,11 +12,11 @@ class Sidebar extends React.Component {
 
   getListElements() {
     return this.props.lists.map(list => {
-      const className = (list.index === this.props.selected ? "sidebar-list selected" : "sidebar-list");
+      const className = (list.id === this.props.selected ? "sidebar-list selected" : "sidebar-list");
       return (
         <li 
-          key={list.index} 
-          id={`list${list.index}`} 
+          key={list.id} 
+          id={`list${list.id}`} 
           className={className}
           onClick={this.props.handleNavClick}
         >
