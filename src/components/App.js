@@ -11,19 +11,17 @@ class App extends React.Component {
         {
           index: 0,
           name: "Today",
-          selected: true,
           tasks: [
-            {index: 0, selected: true, name: "Water Plants", notes: "", date: ""},
-            {index: 1, selected: false, name: "Workout", notes: "", date: ""},
-            {index: 2, selected: false, name: "Go Shopping", notes: "", date: ""}
+            {index: 0, name: "Water Plants", notes: "", date: ""},
+            {index: 1, name: "Workout", notes: "", date: ""},
+            {index: 2, name: "Go Shopping", notes: "", date: ""}
           ]
         },
         {
           index: 1,
           name: "Tomorrow",
-          selected: false,
           tasks: [
-            {index: 0, selected: false, name: "Water Plants Again", notes: "", date: ""}
+            {index: 0, name: "Water Plants Again", notes: "", date: ""}
           ]
         }
       ],
@@ -61,6 +59,37 @@ class App extends React.Component {
     }
   }
 
+  // Adds a new Task or List with name from origin element
+  addItem = (name, origin) => {
+    this.setState(prevState => {
+      const updatedLists = prevState.lists.map(list => list);
+      // Check if it should create a new task
+      if (origin.id === "newTaskInput") {
+        const prevTasks = prevState.lists[prevState.selectedList].tasks;
+        const updatedTasks = prevTasks.map(task => task);
+        updatedTasks.push({
+          index: prevTasks.length,
+          name: name,
+          notes: "",
+          date: ""
+        });
+        updatedLists[prevState.selectedList].tasks = updatedTasks;
+      // Else is a new List
+      } else {
+        updatedLists.push({
+          index: prevState.lists.length,
+          name: name,
+          tasks: []
+        });
+      }
+
+      return {
+        lists: updatedLists
+      }
+    })
+  }
+  
+
   render() {
     const list = this.state.lists[this.state.selectedList];
     const task = list && list.tasks[this.state.selectedTask];
@@ -70,12 +99,14 @@ class App extends React.Component {
           lists={this.state.lists} 
           selected={this.state.selectedList} 
           handleNavClick={this.handleNavClick} 
+          addList={this.addItem}
         />
         {list && <List 
           list={list}
           selected={this.state.selectedTask} 
           handleNavClick={this.handleNavClick} 
           handleCloseClick={this.handleCloseClick}
+          addTask={this.addItem}
         />}
         {task && <Task 
           task={task} 

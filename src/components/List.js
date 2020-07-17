@@ -1,5 +1,6 @@
 import React from 'react';
 import MaterialIcon from 'material-icons-react';
+import NewTaskInput from './NewTaskInput';
 
 class List extends React.Component {
   render() {
@@ -34,7 +35,7 @@ class List extends React.Component {
           </ul>
           <footer>
             <div className="input-group">
-              <input type="text" id="newTaskInput" placeholder="Add a task..." />
+              <NewTaskInput addTask={this.props.addTask}/>
               <button id="newTaskButton" className="add-button">+</button>
             </div>
           </footer>
